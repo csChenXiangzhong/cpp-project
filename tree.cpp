@@ -1,4 +1,4 @@
-// 测试leetcode中树结构时的用例
+// 测试leetcode中树结构时的用例.
 #include <vector>
 #include <iostream>
 #include <algorithm>
