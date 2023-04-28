@@ -14,7 +14,7 @@ public:
         next[0] = -1;
         // j为next数组中指向的当前位置
         int j = 0;
-        // k为j前的字串的最大重复子串的长度
+        // k为j前的字符串的最大重复子串的长度
         int k = -1;
         while (j < next.size() - 1)
         {
