@@ -15,25 +15,22 @@ using namespace std;
 class Solution
 {
 public:
-    vector<int> twoSum(vector<int> &numbers, int target)
+    int findMin(vector<int> &nums)
     {
-        int left = 0, right = numbers.size() - 1;
-        while (left < right)
+        int low = 0, high = nums.size() - 1;
+        while (low < high)
         {
-            if (numbers[left] + numbers[right] == target)
+            int mid = low + (high - low) / 2;
+            if (nums[mid] > nums[high])
             {
-                return {left + 1, right + 1};
-            }
-            else if (numbers[left] + numbers[right] > target)
-            {
-                right--;
+                low = mid + 1;
             }
             else
             {
-                left++;
+                high = mid;
             }
         }
-        return {-1, -1};
+        return nums[low];
     }
 };
 /*
@@ -47,7 +44,8 @@ int main()
     string r = "ccc";
     vector<string> nodes = {"flower", "flow", "flight"};
     vector<vector<int>> nums = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-
+    vector<int> a;
+    a[0] = 1;
     // BinaryTree *bt = new BinaryTree(nodes);
     // s1.longestPalindrome(r);
     string sss = "aabaab!bb";

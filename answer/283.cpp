@@ -12,28 +12,29 @@
 #include <time.h>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-    vector<int> twoSum(vector<int> &numbers, int target)
-    {
-        int left = 0, right = numbers.size() - 1;
-        while (left < right)
+    void moveZeroes(vector<int>& nums) {
+        if(nums.size()==1)
+            return;
+        int slow = 0, fast = 0;
+        while(fast<nums.size())
         {
-            if (numbers[left] + numbers[right] == target)
+            while(fast<nums.size()&&nums[fast]==0)
             {
-                return {left + 1, right + 1};
+                fast++;
             }
-            else if (numbers[left] + numbers[right] > target)
+            if(fast<nums.size()&&fast>slow)
             {
-                right--;
+                swap(nums[slow++], nums[fast]);
             }
-            else
+            else if(fast<nums.size()&&fast==slow)
             {
-                left++;
+                fast++;
+                slow++;
             }
         }
-        return {-1, -1};
+        return;
     }
 };
 /*
@@ -47,7 +48,8 @@ int main()
     string r = "ccc";
     vector<string> nodes = {"flower", "flow", "flight"};
     vector<vector<int>> nums = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-
+    vector<int> a;
+    a[0] = 1;
     // BinaryTree *bt = new BinaryTree(nodes);
     // s1.longestPalindrome(r);
     string sss = "aabaab!bb";

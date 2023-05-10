@@ -12,30 +12,36 @@
 #include <time.h>
 using namespace std;
 
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
 class Solution
 {
 public:
-    vector<int> twoSum(vector<int> &numbers, int target)
+    ListNode *removeNthFromEnd(ListNode *head, int n)
     {
-        int left = 0, right = numbers.size() - 1;
-        while (left < right)
+        ListNode *dummy = new ListNode(0, head);
+        ListNode *fast = dummy, *slow = dummy;
+        for (int i = 0; i < n; i++)
         {
-            if (numbers[left] + numbers[right] == target)
-            {
-                return {left + 1, right + 1};
-            }
-            else if (numbers[left] + numbers[right] > target)
-            {
-                right--;
-            }
-            else
-            {
-                left++;
-            }
+            fast = fast->next;
         }
-        return {-1, -1};
+        while (fast->next != nullptr)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        slow->next = slow->next->next;
+        return dummy->next;
     }
 };
+
 /*
 
 
@@ -47,7 +53,8 @@ int main()
     string r = "ccc";
     vector<string> nodes = {"flower", "flow", "flight"};
     vector<vector<int>> nums = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-
+    vector<int> a;
+    a[0] = 1;
     // BinaryTree *bt = new BinaryTree(nodes);
     // s1.longestPalindrome(r);
     string sss = "aabaab!bb";

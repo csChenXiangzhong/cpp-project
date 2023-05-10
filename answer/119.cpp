@@ -15,25 +15,17 @@ using namespace std;
 class Solution
 {
 public:
-    vector<int> twoSum(vector<int> &numbers, int target)
+    vector<int> getRow(int rowIndex)
     {
-        int left = 0, right = numbers.size() - 1;
-        while (left < right)
+        vector<int> ans(rowIndex + 1);
+        ans[0] = 1;
+        for (int i = 1; i < rowIndex; i++)
         {
-            if (numbers[left] + numbers[right] == target)
-            {
-                return {left + 1, right + 1};
-            }
-            else if (numbers[left] + numbers[right] > target)
-            {
-                right--;
-            }
-            else
-            {
-                left++;
-            }
+            // 1LL为long long类型，防止溢出。
+            ans[i] = 1LL * ans[i - 1] * (rowIndex - i + 1) / i;
         }
-        return {-1, -1};
+        ans[rowIndex] = 1;
+        return ans;
     }
 };
 /*
@@ -47,7 +39,8 @@ int main()
     string r = "ccc";
     vector<string> nodes = {"flower", "flow", "flight"};
     vector<vector<int>> nums = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-
+    vector<int> a;
+    a[0] = 1;
     // BinaryTree *bt = new BinaryTree(nodes);
     // s1.longestPalindrome(r);
     string sss = "aabaab!bb";

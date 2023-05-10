@@ -12,30 +12,32 @@
 #include <time.h>
 using namespace std;
 
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
 class Solution
 {
 public:
-    vector<int> twoSum(vector<int> &numbers, int target)
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
     {
-        int left = 0, right = numbers.size() - 1;
-        while (left < right)
+        if (headA == nullptr || headB == nullptr)
         {
-            if (numbers[left] + numbers[right] == target)
-            {
-                return {left + 1, right + 1};
-            }
-            else if (numbers[left] + numbers[right] > target)
-            {
-                right--;
-            }
-            else
-            {
-                left++;
-            }
+            return nullptr;
         }
-        return {-1, -1};
+        ListNode *pa = headA, *pb = headB;
+        while (pa != pb)
+        {
+            pa = pa == nullptr ? headB : pa->next;
+            pb = pb == nullptr ? headA : pb->next;
+        }
+        return pa;
     }
 };
+
 /*
 
 
@@ -47,7 +49,8 @@ int main()
     string r = "ccc";
     vector<string> nodes = {"flower", "flow", "flight"};
     vector<vector<int>> nums = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-
+    vector<int> a;
+    a[0] = 1;
     // BinaryTree *bt = new BinaryTree(nodes);
     // s1.longestPalindrome(r);
     string sss = "aabaab!bb";

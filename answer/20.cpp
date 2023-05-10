@@ -15,45 +15,43 @@ using namespace std;
 class Solution
 {
 public:
-    vector<int> twoSum(vector<int> &numbers, int target)
+    bool isValid(string s)
     {
-        int left = 0, right = numbers.size() - 1;
-        while (left < right)
+        stack<char> sc;
+        for (int i = 0; i < s.size(); i++)
         {
-            if (numbers[left] + numbers[right] == target)
+            if (s[i] == '(' || s[i] == '[' || s[i] == '{')
+                sc.push(s[i]);
+            else if (!sc.empty())
             {
-                return {left + 1, right + 1};
-            }
-            else if (numbers[left] + numbers[right] > target)
-            {
-                right--;
+                if ((s[i] == ')' && sc.top() == '(') || (s[i] == ']' && sc.top() == '[') || (s[i] == '}' && sc.top() == '{'))
+                    sc.pop();
+                else
+                    return false;
             }
             else
             {
-                left++;
+                return false;
             }
         }
-        return {-1, -1};
+        return sc.empty();
     }
 };
+
 /*
 
 
 */
 int main()
 {
-
-    Solution s1;
+    Solution s;
+    s.isValid("()");
     string r = "ccc";
     vector<string> nodes = {"flower", "flow", "flight"};
     vector<vector<int>> nums = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
 
-    // BinaryTree *bt = new BinaryTree(nodes);
-    // s1.longestPalindrome(r);
     string sss = "aabaab!bb";
-    cout << __cplusplus << endl;
-    // s1.searchInsert(nodes, 0);
-    //  cout << s1.setZeroes(nodes) << endl;
+
     sort(nums.begin(), nums.end());
     return 0;
 }
